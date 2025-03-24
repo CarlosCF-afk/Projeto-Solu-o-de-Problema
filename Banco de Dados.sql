@@ -1,0 +1,28 @@
+CREATE DATABASE academia;
+USE academia;
+
+CREATE TABLE Usuario (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  senha VARCHAR(255) NOT NULL,
+  peso DECIMAL(5,2) NULL,
+  altura DECIMAL(3,2) NULL
+);
+
+CREATE TABLE Treino (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  descricao TEXT,
+  duracao VARCHAR(50),
+  usuario_id INT,
+  FOREIGN KEY (usuario_id) REFERENCES Usuario(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Agendamento (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT,
+  data DATE NOT NULL,
+  hora TIME NOT NULL,
+  FOREIGN KEY (usuario_id) REFERENCES Usuario(id) ON DELETE CASCADE
+);
